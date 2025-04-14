@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
 import ServiceCard from "../components/services/ServiceCard";
-import { Cog, Cube, Printer3d, Layers } from "lucide-react";
+import { Cog, Box, Printer, Layers } from "lucide-react";
 
 const Services: React.FC = () => {
   // Initialize the animation observer
@@ -39,13 +39,13 @@ const Services: React.FC = () => {
       title: "Rapid Injection Moulding",
       description: "From low-volume runs to serial production, our injection moulding service offers fast turnaround times and excellent repeatability. We provide T1 samples in as little as 8 days with a variety of material options.",
       leadTime: "Samples within 8 days – production soon after",
-      icon: <Cube className="w-6 h-6 text-primary" />,
+      icon: <Box className="w-6 h-6 text-primary" />,
     },
     {
       title: "Advanced 3D Printing",
       description: "With multiple printing technologies (SLA, FDM, SLS, MJF, etc.), we bring your designs to life with an extensive selection of plastics, metals, and colors. Ideal for both prototypes and production parts.",
       leadTime: "Parts in as little as 3 days",
-      icon: <Printer3d className="w-6 h-6 text-primary" />,
+      icon: <Printer className="w-6 h-6 text-primary" />,
     },
     {
       title: "Quality Sheet Metal Fabrication",

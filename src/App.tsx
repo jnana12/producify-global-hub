@@ -1,4 +1,4 @@
-
+import React, { useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -17,7 +17,7 @@ const queryClient = new QueryClient();
 
 const App = () => {
   // Add a script to run animation observers after the component mounts
-  React.useEffect(() => {
+  useEffect(() => {
     // Function to initialize intersection observers for animations
     const initAnimations = () => {
       const observer = new IntersectionObserver(
