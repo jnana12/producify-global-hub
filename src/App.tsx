@@ -1,3 +1,4 @@
+
 import React, { useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -11,6 +12,26 @@ import Testimonials from "./pages/Testimonials";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import Capabilities from "./pages/capabilities/Capabilities";
+import Resources from "./pages/resources/Resources";
+import Materials from "./pages/materials/Materials";
+
+// Capabilities subpages
+import ThreeDPrinting from "./pages/capabilities/3DPrinting";
+import InjectionMoulding from "./pages/capabilities/InjectionMoulding";
+import SurfaceFinishes from "./pages/capabilities/SurfaceFinishes";
+import CNCMachining from "./pages/capabilities/CNCMachining";
+import SheetMetalFabrication from "./pages/capabilities/SheetMetalFabrication";
+
+// Resources subpages
+import Guides from "./pages/resources/Guides";
+import QualityAssurance from "./pages/resources/QualityAssurance";
+import Platform from "./pages/resources/Platform";
+import Blog from "./pages/resources/Blog";
+import FAQ from "./pages/resources/FAQ";
+import Customers from "./pages/resources/Customers";
+import Academy from "./pages/resources/Academy";
+import PhoneStand from "./pages/resources/PhoneStand";
 
 // Initialize the query client for React Query
 const queryClient = new QueryClient();
@@ -61,6 +82,29 @@ const App = () => {
             <Route path="/testimonials" element={<Testimonials />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
+            
+            {/* Capabilities Routes */}
+            <Route path="/capabilities" element={<Capabilities />} />
+            <Route path="/capabilities/3d-printing" element={<ThreeDPrinting />} />
+            <Route path="/capabilities/injection-moulding" element={<InjectionMoulding />} />
+            <Route path="/capabilities/surface-finishes" element={<SurfaceFinishes />} />
+            <Route path="/capabilities/cnc-machining" element={<CNCMachining />} />
+            <Route path="/capabilities/sheet-metal-fabrication" element={<SheetMetalFabrication />} />
+            
+            {/* Resources Routes */}
+            <Route path="/resources" element={<Resources />} />
+            <Route path="/resources/guides" element={<Guides />} />
+            <Route path="/resources/quality-assurance" element={<QualityAssurance />} />
+            <Route path="/resources/platform" element={<Platform />} />
+            <Route path="/resources/blog" element={<Blog />} />
+            <Route path="/resources/faq" element={<FAQ />} />
+            <Route path="/resources/customers" element={<Customers />} />
+            <Route path="/resources/academy" element={<Academy />} />
+            <Route path="/resources/phone-stand" element={<PhoneStand />} />
+            
+            {/* Materials Route */}
+            <Route path="/materials" element={<Materials />} />
+            
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
