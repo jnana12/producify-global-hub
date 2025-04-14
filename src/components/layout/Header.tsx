@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, ChevronRight, ChevronDown } from "lucide-react";
@@ -44,9 +43,8 @@ const Header: React.FC = () => {
     setMobileMenuOpen(false);
   }, [location.pathname]);
 
-  // Updated capabilities with all the new options
+  // Updated capabilities with removed Overview option
   const capabilities = [
-    { text: "Overview", href: "/capabilities" },
     { 
       text: "3D Printing", 
       href: "/capabilities/3d-printing",

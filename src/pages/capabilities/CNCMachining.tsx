@@ -5,38 +5,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight, Cog, Router, RotateCcw } from "lucide-react";
+import { ArrowRight, Router, RotateCcw } from "lucide-react";
 
 const CNCMachining: React.FC = () => {
   const technologies = [
-    {
-      id: "service",
-      name: "CNC Machining Service",
-      description: "Our precision CNC machining services deliver high-quality parts with tight tolerances using a wide range of materials including metals, plastics, and composites.",
-      advantages: [
-        "Tight tolerances down to ±0.025mm",
-        "Complex geometries and features",
-        "Excellent surface finishes",
-        "Wide range of material options"
-      ],
-      applications: [
-        "Aerospace components",
-        "Automotive parts",
-        "Medical devices",
-        "Consumer products",
-        "Industrial machinery"
-      ],
-      materials: [
-        "Aluminum alloys",
-        "Stainless steel",
-        "Carbon steel",
-        "Tool steel",
-        "Brass & copper",
-        "Titanium",
-        "Engineering plastics"
-      ],
-      icon: <Cog className="w-8 h-8 text-primary" />
-    },
     {
       id: "milling",
       name: "CNC Milling",
@@ -97,13 +69,47 @@ const CNCMachining: React.FC = () => {
       description="Our precision CNC machining services deliver high-quality parts with tight tolerances using a wide range of materials."
     >
       <div className="max-w-4xl mx-auto">
-        <Tabs defaultValue="service" className="w-full">
-          <TabsList className="grid grid-cols-1 md:grid-cols-3 mb-8">
+        <motion.div 
+          className="mb-10"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <h2 className="text-3xl font-bold mb-4 text-gradient">Precision CNC Machining Services</h2>
+          <p className="text-lg text-foreground/80">
+            Our CNC machining services deliver high-quality parts with tight tolerances using a wide range of materials including metals, plastics, and composites. With advanced multi-axis capabilities, we can produce complex geometries with excellent surface finishes for prototypes to production quantities.
+          </p>
+          
+          <div className="mt-6 flex flex-wrap gap-4">
+            <div className="flex items-center gap-2 bg-muted/50 px-4 py-2 rounded-md">
+              <span className="font-medium">Tolerance:</span>
+              <span>±0.025mm</span>
+            </div>
+            <div className="flex items-center gap-2 bg-muted/50 px-4 py-2 rounded-md">
+              <span className="font-medium">Materials:</span>
+              <span>Metals, Plastics, Composites</span>
+            </div>
+            <div className="flex items-center gap-2 bg-muted/50 px-4 py-2 rounded-md">
+              <span className="font-medium">Lead time:</span>
+              <span>From 3 days</span>
+            </div>
+          </div>
+          
+          <div className="mt-8">
+            <Link to="/upload-file" className="button-primary inline-flex items-center gap-2">
+              Get an Instant Quote
+              <ArrowRight size={16} />
+            </Link>
+          </div>
+        </motion.div>
+        
+        <Tabs defaultValue="milling" className="w-full">
+          <TabsList className="grid grid-cols-1 md:grid-cols-2 mb-8">
             {technologies.map((tech) => (
               <TabsTrigger key={tech.id} value={tech.id}>
                 <div className="flex items-center gap-2">
                   {tech.icon}
-                  <span>{tech.id === "service" ? "Overview" : tech.id === "milling" ? "CNC Milling" : "CNC Turning"}</span>
+                  <span>{tech.id === "milling" ? "CNC Milling" : "CNC Turning"}</span>
                 </div>
               </TabsTrigger>
             ))}
@@ -143,10 +149,10 @@ const CNCMachining: React.FC = () => {
                     
                     <div>
                       <h3 className="text-lg font-medium mb-2 text-primary">
-                        {tech.id === "service" ? "Available Materials" : "Key Capabilities"}
+                        Key Capabilities
                       </h3>
                       <div className="flex flex-wrap gap-2">
-                        {(tech.materials || tech.capabilities)?.map((item, i) => (
+                        {tech.capabilities.map((item, i) => (
                           <span key={i} className="px-3 py-1 rounded-full bg-muted text-sm">
                             {item}
                           </span>
