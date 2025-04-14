@@ -44,13 +44,60 @@ const Header: React.FC = () => {
     setMobileMenuOpen(false);
   }, [location.pathname]);
 
+  // Updated capabilities with all the new options
   const capabilities = [
     { text: "Overview", href: "/capabilities" },
-    { text: "3D Printing", href: "/capabilities/3d-printing" },
-    { text: "Injection Moulding", href: "/capabilities/injection-moulding" },
-    { text: "Surface Finishes", href: "/capabilities/surface-finishes" },
-    { text: "CNC Machining", href: "/capabilities/cnc-machining" },
-    { text: "Sheet Metal Fabrication", href: "/capabilities/sheet-metal-fabrication" },
+    { 
+      text: "3D Printing", 
+      href: "/capabilities/3d-printing",
+      subItems: [
+        { text: "3D Printing Service", href: "/capabilities/3d-printing/service" },
+        { text: "Fused Deposition Modelling (FDM)", href: "/capabilities/3d-printing/fdm" },
+        { text: "Multi-Jet Fusion (MJF)", href: "/capabilities/3d-printing/mjf" },
+        { text: "Selective Laser Sintering (SLS)", href: "/capabilities/3d-printing/sls" },
+        { text: "Stereolithography (SLA)", href: "/capabilities/3d-printing/sla" },
+        { text: "Metal 3D Printing (DMLS and SLM)", href: "/capabilities/3d-printing/metal" },
+      ]
+    },
+    { 
+      text: "Injection Moulding", 
+      href: "/capabilities/injection-moulding",
+      subItems: [
+        { text: "Injection Moulding Service", href: "/capabilities/injection-moulding/service" },
+        { text: "Overmoulding", href: "/capabilities/injection-moulding/overmoulding" },
+        { text: "Insert Moulding", href: "/capabilities/injection-moulding/insert-moulding" },
+      ]
+    },
+    { 
+      text: "Surface Finishes", 
+      href: "/capabilities/surface-finishes",
+      subItems: [
+        { text: "Sheet Metal Surface Finishes", href: "/capabilities/surface-finishes/sheet-metal" },
+        { text: "CNC Surface Finishes", href: "/capabilities/surface-finishes/cnc" },
+        { text: "3D Printing Surface Finishes", href: "/capabilities/surface-finishes/3d-printing" },
+      ]
+    },
+    { 
+      text: "CNC Machining", 
+      href: "/capabilities/cnc-machining",
+      subItems: [
+        { text: "CNC Machining Service", href: "/capabilities/cnc-machining/service" },
+        { text: "CNC Milling", href: "/capabilities/cnc-machining/milling" },
+        { text: "CNC Turning", href: "/capabilities/cnc-machining/turning" },
+      ]
+    },
+    { 
+      text: "Sheet Metal Fabrication", 
+      href: "/capabilities/sheet-metal-fabrication",
+      subItems: [
+        { text: "Sheet Metal", href: "/capabilities/sheet-metal-fabrication/sheet-metal" },
+        { text: "Assembly and Subassembly", href: "/capabilities/sheet-metal-fabrication/assembly" },
+        { text: "Waterjet Cutting", href: "/capabilities/sheet-metal-fabrication/waterjet" },
+        { text: "Laser Cutting", href: "/capabilities/sheet-metal-fabrication/laser" },
+        { text: "Extrusions", href: "/capabilities/sheet-metal-fabrication/extrusions" },
+        { text: "Die Casting", href: "/capabilities/sheet-metal-fabrication/die-casting" },
+      ]
+    },
   ];
 
   const resources = [
@@ -120,23 +167,40 @@ const Header: React.FC = () => {
                 </Link>
               </NavigationMenuItem>
               
-              {/* Capabilities Dropdown */}
+              {/* Capabilities Dropdown - Updated with new structure */}
               <NavigationMenuItem>
                 <NavigationMenuTrigger className={location.pathname.includes("/capabilities") ? "text-primary font-medium" : ""}>
                   Capabilities
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-                    {capabilities.map((item) => (
-                      <li key={item.href}>
+                  <ul className="grid gap-3 p-4 w-[800px] md:grid-cols-3 lg:w-[800px]">
+                    {capabilities.map((category) => (
+                      <li key={category.href} className="mb-2">
                         <NavigationMenuLink asChild>
                           <Link
-                            to={item.href}
-                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                            to={category.href}
+                            className="block select-none rounded-md p-2 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground font-medium"
                           >
-                            <div className="text-sm font-medium leading-none">{item.text}</div>
+                            {category.text}
                           </Link>
                         </NavigationMenuLink>
+                        
+                        {category.subItems && (
+                          <ul className="ml-2 mt-1 space-y-1">
+                            {category.subItems.map((subItem) => (
+                              <li key={subItem.href}>
+                                <NavigationMenuLink asChild>
+                                  <Link
+                                    to={subItem.href}
+                                    className="block select-none rounded-md p-1 pl-2 text-sm leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                                  >
+                                    {subItem.text}
+                                  </Link>
+                                </NavigationMenuLink>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
                       </li>
                     ))}
                   </ul>
@@ -258,10 +322,10 @@ const Header: React.FC = () => {
         </button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu - Updated with new structure */}
       <div
         className={`md:hidden absolute top-16 left-0 w-full bg-background/95 backdrop-blur-lg shadow-lg transition-all duration-300 ${
-          mobileMenuOpen ? "max-h-screen" : "max-h-0 overflow-hidden"
+          mobileMenuOpen ? "max-h-screen overflow-y-auto" : "max-h-0 overflow-hidden"
         }`}
       >
         <nav className="flex flex-col p-4 space-y-1">
@@ -279,7 +343,7 @@ const Header: React.FC = () => {
             </Link>
           ))}
           
-          {/* Mobile Capabilities Dropdown */}
+          {/* Mobile Capabilities Dropdown - Updated */}
           <div className="relative py-2">
             <button 
               className="w-full text-left px-4 py-3 rounded-md flex justify-between items-center bg-background/80 text-foreground/80 hover:bg-muted hover:text-foreground"
@@ -293,14 +357,29 @@ const Header: React.FC = () => {
               <ChevronDown className="w-4 h-4" />
             </button>
             <div id="mobile-capabilities-dropdown" className="hidden px-4 py-2 space-y-1">
-              {capabilities.map((item) => (
-                <Link
-                  key={item.href}
-                  to={item.href}
-                  className="block px-4 py-2 rounded-md text-sm text-foreground/70 hover:bg-muted hover:text-foreground"
-                >
-                  {item.text}
-                </Link>
+              {capabilities.map((category) => (
+                <div key={category.href} className="mb-2">
+                  <Link
+                    to={category.href}
+                    className="block px-4 py-2 rounded-md font-medium text-foreground/80 hover:bg-muted hover:text-foreground"
+                  >
+                    {category.text}
+                  </Link>
+                  
+                  {category.subItems && (
+                    <div className="ml-4 space-y-1 mt-1">
+                      {category.subItems.map((subItem) => (
+                        <Link
+                          key={subItem.href}
+                          to={subItem.href}
+                          className="block px-4 py-1 rounded-md text-sm text-foreground/70 hover:bg-muted hover:text-foreground"
+                        >
+                          {subItem.text}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
               ))}
             </div>
           </div>
