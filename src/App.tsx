@@ -15,6 +15,8 @@ import NotFound from "./pages/NotFound";
 import Capabilities from "./pages/capabilities/Capabilities";
 import Resources from "./pages/resources/Resources";
 import Materials from "./pages/materials/Materials";
+import UploadFile from "./pages/UploadFile";
+import SignIn from "./pages/SignIn";
 
 // Capabilities subpages
 import ThreeDPrinting from "./pages/capabilities/3DPrinting";
@@ -82,6 +84,8 @@ const App = () => {
             <Route path="/testimonials" element={<Testimonials />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/upload-file" element={<UploadFile />} />
+            <Route path="/sign-in" element={<SignIn />} />
             
             {/* Capabilities Routes */}
             <Route path="/capabilities" element={<Capabilities />} />
