@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, ChevronRight, ChevronDown } from "lucide-react";
@@ -43,11 +44,10 @@ const Header: React.FC = () => {
     setMobileMenuOpen(false);
   }, [location.pathname]);
 
-  // Updated capabilities with removed Overview option
+  // Updated capabilities with removed top-level clickable options
   const capabilities = [
     { 
       text: "3D Printing", 
-      href: "/capabilities/3d-printing",
       subItems: [
         { text: "3D Printing Service", href: "/capabilities/3d-printing/service" },
         { text: "Fused Deposition Modelling (FDM)", href: "/capabilities/3d-printing/fdm" },
@@ -59,7 +59,6 @@ const Header: React.FC = () => {
     },
     { 
       text: "Injection Moulding", 
-      href: "/capabilities/injection-moulding",
       subItems: [
         { text: "Injection Moulding Service", href: "/capabilities/injection-moulding/service" },
         { text: "Overmoulding", href: "/capabilities/injection-moulding/overmoulding" },
@@ -68,7 +67,6 @@ const Header: React.FC = () => {
     },
     { 
       text: "Surface Finishes", 
-      href: "/capabilities/surface-finishes",
       subItems: [
         { text: "Sheet Metal Surface Finishes", href: "/capabilities/surface-finishes/sheet-metal" },
         { text: "CNC Surface Finishes", href: "/capabilities/surface-finishes/cnc" },
@@ -77,7 +75,6 @@ const Header: React.FC = () => {
     },
     { 
       text: "CNC Machining", 
-      href: "/capabilities/cnc-machining",
       subItems: [
         { text: "CNC Machining Service", href: "/capabilities/cnc-machining/service" },
         { text: "CNC Milling", href: "/capabilities/cnc-machining/milling" },
@@ -86,7 +83,6 @@ const Header: React.FC = () => {
     },
     { 
       text: "Sheet Metal Fabrication", 
-      href: "/capabilities/sheet-metal-fabrication",
       subItems: [
         { text: "Sheet Metal", href: "/capabilities/sheet-metal-fabrication/sheet-metal" },
         { text: "Assembly and Subassembly", href: "/capabilities/sheet-metal-fabrication/assembly" },
@@ -165,28 +161,23 @@ const Header: React.FC = () => {
                 </Link>
               </NavigationMenuItem>
               
-              {/* Capabilities Dropdown - Updated with new structure */}
+              {/* Capabilities Dropdown - Updated: category headers non-clickable */}
               <NavigationMenuItem>
                 <NavigationMenuTrigger className={location.pathname.includes("/capabilities") ? "text-primary font-medium" : ""}>
                   Capabilities
                 </NavigationMenuTrigger>
-                <NavigationMenuContent>
+                <NavigationMenuContent className="origin-top-center">
                   <ul className="grid gap-3 p-4 w-[800px] md:grid-cols-3 lg:w-[800px]">
-                    {capabilities.map((category) => (
-                      <li key={category.href} className="mb-2">
-                        <NavigationMenuLink asChild>
-                          <Link
-                            to={category.href}
-                            className="block select-none rounded-md p-2 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground font-medium"
-                          >
-                            {category.text}
-                          </Link>
-                        </NavigationMenuLink>
+                    {capabilities.map((category, idx) => (
+                      <li key={`category-${idx}`} className="mb-2">
+                        <div className="block select-none rounded-md p-2 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground font-medium">
+                          {category.text}
+                        </div>
                         
                         {category.subItems && (
                           <ul className="ml-2 mt-1 space-y-1">
-                            {category.subItems.map((subItem) => (
-                              <li key={subItem.href}>
+                            {category.subItems.map((subItem, subIdx) => (
+                              <li key={`subitem-${idx}-${subIdx}`}>
                                 <NavigationMenuLink asChild>
                                   <Link
                                     to={subItem.href}
@@ -210,7 +201,7 @@ const Header: React.FC = () => {
                 <NavigationMenuTrigger className={location.pathname.includes("/resources") ? "text-primary font-medium" : ""}>
                   Resources
                 </NavigationMenuTrigger>
-                <NavigationMenuContent>
+                <NavigationMenuContent className="origin-top-center">
                   <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
                     {resources.map((item) => (
                       <li key={item.href}>
@@ -233,7 +224,7 @@ const Header: React.FC = () => {
                 <NavigationMenuTrigger className={location.pathname.includes("/materials") ? "text-primary font-medium" : ""}>
                   Materials
                 </NavigationMenuTrigger>
-                <NavigationMenuContent>
+                <NavigationMenuContent className="origin-top-center">
                   <ul className="grid w-[400px] gap-3 p-4">
                     {materials.map((item) => (
                       <li key={item.href}>
@@ -320,7 +311,7 @@ const Header: React.FC = () => {
         </button>
       </div>
 
-      {/* Mobile Menu - Updated with new structure */}
+      {/* Mobile Menu - Updated with new structure where category headers are non-clickable */}
       <div
         className={`md:hidden absolute top-16 left-0 w-full bg-background/95 backdrop-blur-lg shadow-lg transition-all duration-300 ${
           mobileMenuOpen ? "max-h-screen overflow-y-auto" : "max-h-0 overflow-hidden"
@@ -341,7 +332,7 @@ const Header: React.FC = () => {
             </Link>
           ))}
           
-          {/* Mobile Capabilities Dropdown - Updated */}
+          {/* Mobile Capabilities Dropdown - Updated to make category headers non-clickable */}
           <div className="relative py-2">
             <button 
               className="w-full text-left px-4 py-3 rounded-md flex justify-between items-center bg-background/80 text-foreground/80 hover:bg-muted hover:text-foreground"
@@ -355,20 +346,17 @@ const Header: React.FC = () => {
               <ChevronDown className="w-4 h-4" />
             </button>
             <div id="mobile-capabilities-dropdown" className="hidden px-4 py-2 space-y-1">
-              {capabilities.map((category) => (
-                <div key={category.href} className="mb-2">
-                  <Link
-                    to={category.href}
-                    className="block px-4 py-2 rounded-md font-medium text-foreground/80 hover:bg-muted hover:text-foreground"
-                  >
+              {capabilities.map((category, idx) => (
+                <div key={`mobile-category-${idx}`} className="mb-2">
+                  <div className="block px-4 py-2 rounded-md font-medium text-foreground/80">
                     {category.text}
-                  </Link>
+                  </div>
                   
                   {category.subItems && (
                     <div className="ml-4 space-y-1 mt-1">
-                      {category.subItems.map((subItem) => (
+                      {category.subItems.map((subItem, subIdx) => (
                         <Link
-                          key={subItem.href}
+                          key={`mobile-subitem-${idx}-${subIdx}`}
                           to={subItem.href}
                           className="block px-4 py-1 rounded-md text-sm text-foreground/70 hover:bg-muted hover:text-foreground"
                         >
