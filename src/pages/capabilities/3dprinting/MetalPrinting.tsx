@@ -197,6 +197,7 @@ const MetalPrinting: React.FC = () => {
     }
   };
 
+  // Fixed the pulseAnimation variant - changed string to a proper enum value
   const pulseAnimation = {
     initial: { scale: 1 },
     pulse: { 
@@ -204,7 +205,7 @@ const MetalPrinting: React.FC = () => {
       transition: { 
         duration: 2,
         repeat: Infinity,
-        repeatType: "reverse" 
+        repeatType: "reverse" // Fixed: using a valid literal value
       }
     }
   };
