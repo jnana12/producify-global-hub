@@ -7,6 +7,7 @@ import Footer from "../components/layout/Footer";
 import ContactForm from "../components/contact/ContactForm";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import AnimatedBackground from "../components/home/AnimatedBackground";
 
 const Index: React.FC = () => {
   // Initialize the animation observer
@@ -32,7 +33,10 @@ const Index: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col relative">
+      {/* Global animated background */}
+      <AnimatedBackground />
+      
       <Header />
       
       <main className="flex-grow">
@@ -40,7 +44,7 @@ const Index: React.FC = () => {
         <ValueProposition />
         
         {/* Services Preview */}
-        <section className="section-padding bg-gradient-primary">
+        <section className="section-padding relative">
           <div className="container mx-auto px-4">
             <h2 className="section-title text-center animate-on-scroll">Our Services</h2>
             <p className="section-subtitle text-center animate-on-scroll">
@@ -76,7 +80,7 @@ const Index: React.FC = () => {
         </section>
         
         {/* Contact Form */}
-        <section id="contact-section" className="section-padding bg-card/30">
+        <section id="contact-section" className="section-padding neo-blur relative z-10">
           <div className="container mx-auto px-4">
             <h2 className="section-title text-center animate-on-scroll">Get Started Today</h2>
             <p className="section-subtitle text-center animate-on-scroll">
