@@ -1,7 +1,7 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import PageTemplate from "../../../components/layout/PageTemplate";
 import { Hammer, ArrowRight, Sparkles, Box, Layers, Gauge } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
@@ -197,15 +197,15 @@ const MetalPrinting: React.FC = () => {
     }
   };
 
-  // Fixed the pulseAnimation variant - changed string to a proper enum value
-  const pulseAnimation = {
+  // Fixed the pulseAnimation variant by explicitly typing repeatType as a literal
+  const pulseAnimation: Variants = {
     initial: { scale: 1 },
     pulse: { 
       scale: [1, 1.05, 1],
       transition: { 
         duration: 2,
         repeat: Infinity,
-        repeatType: "reverse" // Fixed: using a valid literal value
+        repeatType: "reverse" as const // Fixed: using 'as const' to ensure it's treated as a literal type
       }
     }
   };
