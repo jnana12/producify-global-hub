@@ -5,25 +5,25 @@
 
 @layer base {
   :root {
-    --background: 222 47% 6%;
-    --foreground: 214 32% 91%;
+    --background: 225 47% 6%;
+    --foreground: 210 40% 98%;
 
-    --card: 222 47% 9%;
-    --card-foreground: 214 32% 91%;
+    --card: 225 47% 9%;
+    --card-foreground: 210 40% 98%;
 
-    --popover: 222 47% 10%;
-    --popover-foreground: 214 32% 91%;
+    --popover: 225 47% 10%;
+    --popover-foreground: 210 40% 98%;
 
-    --primary: 199 89% 48%;
+    --primary: 16 89% 55%;
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 258 76% 44%;
+    --secondary: 217 76% 56%;
     --secondary-foreground: 210 40% 98%;
 
     --muted: 217 33% 17%;
     --muted-foreground: 215 20% 70%;
 
-    --accent: 199 89% 48%;
+    --accent: 16 89% 55%;
     --accent-foreground: 210 40% 98%;
 
     --destructive: 0 62% 46%;
@@ -31,18 +31,18 @@
 
     --border: 217 33% 17%;
     --input: 217 33% 17%;
-    --ring: 199 89% 48%;
+    --ring: 16 89% 55%;
 
     --radius: 0.5rem;
 
-    --sidebar-background: 222 47% 6%;
-    --sidebar-foreground: 214 32% 91%;
-    --sidebar-primary: 199 89% 48%;
+    --sidebar-background: 225 47% 6%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 16 89% 55%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 222 47% 10%;
-    --sidebar-accent-foreground: 214 32% 91%;
-    --sidebar-border: 222 47% 15%;
-    --sidebar-ring: 199 89% 48%;
+    --sidebar-accent: 225 47% 10%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 225 47% 15%;
+    --sidebar-ring: 16 89% 55%;
   }
 }
 
@@ -75,7 +75,7 @@
   }
 
   .text-gradient-secondary {
-    @apply bg-gradient-to-br from-secondary via-secondary/80 to-purple-400/90 bg-clip-text text-transparent;
+    @apply bg-gradient-to-br from-secondary via-secondary/80 to-blue-400/90 bg-clip-text text-transparent;
   }
 
   .bg-gradient-primary {
@@ -99,7 +99,7 @@
   }
 
   .hover-glow {
-    @apply transition-shadow duration-300 hover:shadow-[0_0_20px_rgba(14,165,233,0.3)];
+    @apply transition-shadow duration-300 hover:shadow-[0_0_20px_rgba(239,68,68,0.4)];
   }
 
   .animate-on-scroll {
@@ -111,17 +111,17 @@
   }
 
   .service-card {
-    @apply glass-morphism p-6 md:p-8 rounded-lg transition-all duration-300 hover:translate-y-[-5px] hover:shadow-[0_15px_30px_-15px_rgba(14,165,233,0.3)];
+    @apply glass-morphism p-6 md:p-8 rounded-lg transition-all duration-300 hover:translate-y-[-5px] hover:shadow-[0_15px_30px_-15px_rgba(239,68,68,0.4)];
   }
 
   .button-primary {
     @apply bg-primary hover:bg-primary/90 text-white font-medium py-2 px-4 md:px-6 rounded-md transition-all duration-300 
-    hover:shadow-[0_0_15px_rgba(14,165,233,0.5)] flex items-center justify-center gap-2;
+    hover:shadow-[0_0_15px_rgba(239,68,68,0.5)] flex items-center justify-center gap-2;
   }
 
   .button-secondary {
     @apply bg-secondary hover:bg-secondary/90 text-white font-medium py-2 px-4 md:px-6 rounded-md transition-all duration-300 
-    hover:shadow-[0_0_15px_rgba(109,84,229,0.5)] flex items-center justify-center gap-2;
+    hover:shadow-[0_0_15px_rgba(59,130,246,0.5)] flex items-center justify-center gap-2;
   }
 
   .button-outline {
