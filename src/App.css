@@ -59,6 +59,49 @@
   100% { background-position: 0% 50%; }
 }
 
+@keyframes color-cycle {
+  0% { color: rgba(14, 165, 233, 1); }
+  50% { color: rgba(121, 82, 233, 1); }
+  100% { color: rgba(14, 165, 233, 1); }
+}
+
+@keyframes text-shadow-pulse {
+  0%, 100% { text-shadow: 0 0 5px rgba(14, 165, 233, 0); }
+  50% { text-shadow: 0 0 15px rgba(14, 165, 233, 0.5); }
+}
+
+@keyframes bounce-subtle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes flip {
+  0% { transform: perspective(400px) rotateY(0); }
+  100% { transform: perspective(400px) rotateY(360deg); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes jiggle {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-2px); }
+  75% { transform: translateX(2px); }
+}
+
+@keyframes scale-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* Base animation classes */
 .float-animation {
   animation: float 6s ease-in-out infinite;
 }
@@ -73,6 +116,39 @@
   animation: gradient-shift 15s ease infinite;
 }
 
+.color-cycle {
+  animation: color-cycle 6s ease-in-out infinite;
+}
+
+.text-shadow-pulse {
+  animation: text-shadow-pulse 3s ease-in-out infinite;
+}
+
+.bounce-subtle {
+  animation: bounce-subtle 3s ease-in-out infinite;
+}
+
+.spin-slow {
+  animation: spin-slow 20s linear infinite;
+}
+
+.shimmer {
+  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 3s infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+.jiggle-hover:hover {
+  animation: jiggle 0.3s ease-in-out 2;
+}
+
+.scale-pulse {
+  animation: scale-pulse 3s ease-in-out infinite;
+}
+
+/* Interactive hover classes */
 .hover-scale {
   transition: transform 0.3s ease;
 }
@@ -81,6 +157,48 @@
   transform: scale(1.05);
 }
 
+.hover-rotate {
+  transition: transform 0.3s ease;
+}
+
+.hover-rotate:hover {
+  transform: rotate(3deg);
+}
+
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.hover-color-shift {
+  transition: color 0.3s ease;
+}
+
+.hover-color-shift:hover {
+  color: #0ea5e9;
+}
+
+.hover-brightness {
+  transition: filter 0.3s ease;
+}
+
+.hover-brightness:hover {
+  filter: brightness(1.2);
+}
+
+.hover-glow {
+  transition: box-shadow 0.3s ease;
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 20px rgba(14, 165, 233, 0.5);
+}
+
+/* 3D effect classes */
 .card-3d-effect {
   transition: transform 0.5s ease;
   transform-style: preserve-3d;
@@ -91,6 +209,29 @@
   transform: rotateY(5deg) rotateX(5deg);
 }
 
+.card-tilt {
+  transition: transform 0.3s ease;
+}
+
+.card-tilt:hover {
+  transform: perspective(1000px) rotateX(3deg) rotateY(3deg);
+}
+
+.parallax-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.parallax-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.3s ease-out;
+}
+
+/* Overlay effects */
 .badge-glow {
   position: relative;
   overflow: hidden;
@@ -108,14 +249,22 @@
   animation: shine 3s infinite;
 }
 
-@keyframes shine {
-  0% { transform: translateX(-100%) rotate(45deg); }
-  100% { transform: translateX(100%) rotate(45deg); }
+.glass-enhanced {
+  backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05),
+    inset 0 0 10px rgba(255, 255, 255, 0.1);
 }
 
+/* Card animations */
 .feature-card {
   transition: all 0.3s ease;
   border: 1px solid transparent;
+  position: relative;
+  overflow: hidden;
 }
 
 .feature-card:hover {
@@ -124,6 +273,24 @@
   transform: translateY(-5px);
 }
 
+.feature-card::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(255, 255, 255, 0.05),
+    transparent
+  );
+  transform: rotate(45deg);
+  animation: shine 6s infinite;
+}
+
+/* Entrance animations */
 .fade-in {
   opacity: 0;
   transform: translateY(20px);
@@ -137,6 +304,46 @@
   }
 }
 
+.fade-in-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  animation: fadeInLeft 0.8s ease forwards;
+}
+
+@keyframes fadeInLeft {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.fade-in-right {
+  opacity: 0;
+  transform: translateX(40px);
+  animation: fadeInRight 0.8s ease forwards;
+}
+
+@keyframes fadeInRight {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.zoom-in {
+  opacity: 0;
+  transform: scale(0.8);
+  animation: zoomIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes zoomIn {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Stagger animations */
 .stagger-animation > * {
   opacity: 0;
   transform: translateY(20px);
@@ -148,3 +355,85 @@
 .stagger-animation > *:nth-child(4) { animation: fadeIn 0.5s ease forwards 0.4s; }
 .stagger-animation > *:nth-child(5) { animation: fadeIn 0.5s ease forwards 0.5s; }
 .stagger-animation > *:nth-child(6) { animation: fadeIn 0.5s ease forwards 0.6s; }
+.stagger-animation > *:nth-child(7) { animation: fadeIn 0.5s ease forwards 0.7s; }
+.stagger-animation > *:nth-child(8) { animation: fadeIn 0.5s ease forwards 0.8s; }
+.stagger-animation > *:nth-child(9) { animation: fadeIn 0.5s ease forwards 0.9s; }
+.stagger-animation > *:nth-child(10) { animation: fadeIn 0.5s ease forwards 1s; }
+
+/* Button effects */
+.button-glow {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.button-glow::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: 0.5s;
+  z-index: -1;
+}
+
+.button-glow:hover::before {
+  left: 100%;
+}
+
+/* Shine animation */
+@keyframes shine {
+  0% { transform: translateX(-100%) rotate(45deg); }
+  100% { transform: translateX(100%) rotate(45deg); }
+}
+
+/* Unique button styles */
+.button-primary {
+  @apply bg-primary hover:bg-primary/90 text-white font-medium py-2 px-4 md:px-6 rounded-md transition-all duration-300 
+  hover:shadow-[0_0_15px_rgba(14,165,233,0.5)] flex items-center justify-center gap-2;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.button-primary::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: 0.5s;
+  z-index: -1;
+}
+
+.button-primary:hover::after {
+  left: 100%;
+}
+
+.button-secondary {
+  @apply bg-secondary hover:bg-secondary/90 text-white font-medium py-2 px-4 md:px-6 rounded-md transition-all duration-300 
+  hover:shadow-[0_0_15px_rgba(109,84,229,0.5)] flex items-center justify-center gap-2;
+  position: relative;
+  overflow: hidden;
+}
+
+.button-outline {
+  @apply border border-primary/50 hover:border-primary text-primary hover:bg-primary/10 font-medium py-2 px-4 md:px-6 
+  rounded-md transition-all duration-300 flex items-center justify-center gap-2;
+  position: relative;
+  overflow: hidden;
+}
