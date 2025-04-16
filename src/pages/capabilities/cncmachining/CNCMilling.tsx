@@ -2,9 +2,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import PageTemplate from "../../../components/layout/PageTemplate";
 import { Router, ArrowRight } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
 import CapabilityTemplate from "../../../components/capabilities/CapabilityTemplate";
 
 const CNCMilling: React.FC = () => {

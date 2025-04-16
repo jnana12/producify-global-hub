@@ -1,3 +1,4 @@
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -40,3 +41,110 @@
 .read-the-docs {
   color: #888;
 }
+
+/* New Animations and Effects */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 10px 0 rgba(14, 165, 233, 0.2); }
+  50% { box-shadow: 0 0 20px 5px rgba(14, 165, 233, 0.4); }
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.float-animation {
+  animation: float 6s ease-in-out infinite;
+}
+
+.pulse-glow {
+  animation: pulse-glow 4s ease-in-out infinite;
+}
+
+.gradient-background {
+  background: linear-gradient(-45deg, #0ea5e9, #6d54e5, #3b82f6, #7e22ce);
+  background-size: 400% 400%;
+  animation: gradient-shift 15s ease infinite;
+}
+
+.hover-scale {
+  transition: transform 0.3s ease;
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
+}
+
+.card-3d-effect {
+  transition: transform 0.5s ease;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.card-3d-effect:hover {
+  transform: rotateY(5deg) rotateX(5deg);
+}
+
+.badge-glow {
+  position: relative;
+  overflow: hidden;
+}
+
+.badge-glow::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+  transform: rotate(45deg);
+  animation: shine 3s infinite;
+}
+
+@keyframes shine {
+  0% { transform: translateX(-100%) rotate(45deg); }
+  100% { transform: translateX(100%) rotate(45deg); }
+}
+
+.feature-card {
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.feature-card:hover {
+  border-color: rgba(14, 165, 233, 0.4);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 5px 15px -5px rgba(14, 165, 233, 0.2);
+  transform: translateY(-5px);
+}
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeIn 0.8s ease forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.stagger-animation > * {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.stagger-animation > *:nth-child(1) { animation: fadeIn 0.5s ease forwards 0.1s; }
+.stagger-animation > *:nth-child(2) { animation: fadeIn 0.5s ease forwards 0.2s; }
+.stagger-animation > *:nth-child(3) { animation: fadeIn 0.5s ease forwards 0.3s; }
+.stagger-animation > *:nth-child(4) { animation: fadeIn 0.5s ease forwards 0.4s; }
+.stagger-animation > *:nth-child(5) { animation: fadeIn 0.5s ease forwards 0.5s; }
+.stagger-animation > *:nth-child(6) { animation: fadeIn 0.5s ease forwards 0.6s; }

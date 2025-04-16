@@ -1,13 +1,36 @@
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import PageTemplate from "../../../components/layout/PageTemplate";
-import { Zap, ArrowRight } from "lucide-react";
+import { Zap, ArrowRight, Sparkles, Box, Layers, Gauge } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 
 const SLS: React.FC = () => {
   const partners = Array(6).fill("Manufacturing partner network for 3D printing");
+  
+  // Animation observer for scroll animations
+  const animatedElementsRef = useRef<HTMLDivElement>(null);
+  
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("active");
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    const elements = document.querySelectorAll(".animate-on-scroll");
+    elements.forEach((el) => observer.observe(el));
+
+    return () => {
+      elements.forEach((el) => observer.unobserve(el));
+    };
+  }, []);
   
   const capabilities = {
     tolerances: "± 0.3% with a lower limit of ± 0.3 mm",
@@ -19,27 +42,27 @@ const SLS: React.FC = () => {
   
   const benefits = [
     {
-      icon: "Icon 3D printer",
+      icon: <Box className="w-6 h-6 text-primary" />,
       title: "Rapid turnaround",
       description: "Our streamlined order process allows you to receive a quote instantly or within one business day, and SLS 3D printed parts are delivered in as little as three working days."
     },
     {
-      icon: "Tick",
+      icon: <Sparkles className="w-6 h-6 text-primary" />,
       title: "State-of-the-art technology",
       description: "All of our partners' SLS 3D printing technologies are the most up-to-date in the industry, ensuring that you always benefit from the latest innovations in selected laser sintering services."
     },
     {
-      icon: "Icon modelling",
+      icon: <Layers className="w-6 h-6 text-primary" />,
       title: "Unmatched scalability",
       description: "With our network of over 260 manufacturers offering SLS 3D printing services, you can rest assured that there is always capacity for both prototyping and large-scale production."
     },
     {
-      icon: "Icon industrial robot",
+      icon: <Gauge className="w-6 h-6 text-primary" />,
       title: "A wide range of industries",
       description: "Our SLS 3D printing services creates parts that meet the high quality demands of numerous industries; from mission-critical aerospace parts to medical components."
     },
     {
-      icon: "Stacks",
+      icon: <Zap className="w-6 h-6 text-primary" />,
       title: "High-quality materials",
       description: "Geomiq's SLS 3D printing services provide industrial-grade, high-quality engineering material options, ensuring you have the perfect material for your application"
     }
@@ -47,22 +70,22 @@ const SLS: React.FC = () => {
   
   const processSteps = [
     {
-      icon: "bolt and shapes",
+      icon: <Box className="w-6 h-6 text-primary" />,
       title: "Get a quote",
       description: "Upload your CAD model to our platform, select your lead time, and get an instant or 24-hour SLS 3D printing quote."
     },
     {
-      icon: "Robot arm",
+      icon: <Gauge className="w-6 h-6 text-primary" />,
       title: "Production",
       description: "We select the most suited manufacturer for your order, with production starting immediately"
     },
     {
-      icon: "Feature image",
+      icon: <Sparkles className="w-6 h-6 text-primary" />,
       title: "Quality control",
       description: "We guarantee your order arrives to specification with our industry-leading virtual and physical quality standards."
     },
     {
-      icon: "Bolt in box",
+      icon: <Layers className="w-6 h-6 text-primary" />,
       title: "Delivery",
       description: "We ship your parts on express services where possible, providing physical delivery notes and inspection reports."
     }
@@ -176,27 +199,37 @@ const SLS: React.FC = () => {
       title="Selective Laser Sintering (SLS)"
       description="Selective Laser Sintering uses a high-powered laser to fuse small particles of polymer powder into a solid structure, producing durable parts with complex geometries without support structures."
     >
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-4xl mx-auto" ref={animatedElementsRef}>
         {/* Trusted By Section */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold text-center mb-8">Trusted by</h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
-            {partners.map((partner, index) => (
-              <div key={index} className="bg-muted/30 p-6 rounded-lg flex items-center justify-center">
-                <p className="text-center text-sm text-foreground/70">{partner}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* What is SLS 3D printing? */}
         <motion.section 
-          className="mb-16"
+          className="mb-16 fade-in"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <div className="glass-morphism p-6 rounded-lg">
+          <h2 className="text-2xl font-bold text-center mb-8 text-gradient">Trusted by</h2>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-6 stagger-animation">
+            {partners.map((partner, index) => (
+              <motion.div 
+                key={index} 
+                className="bg-muted/30 p-6 rounded-lg flex items-center justify-center hover-scale pulse-glow"
+                whileHover={{ scale: 1.03 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <p className="text-center text-sm text-foreground/70">{partner}</p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.section>
+
+        {/* What is SLS 3D printing? */}
+        <motion.section 
+          className="mb-16 animate-on-scroll"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          <div className="glass-morphism p-6 rounded-lg card-3d-effect">
             <h2 className="text-3xl font-bold mb-4 text-gradient">What is SLS 3D printing?</h2>
             <p className="text-lg text-foreground/80 mb-6">
               Selective Laser Sintering (SLS) is a powder bed fusion 3D printing technology that prints high-quality parts from atomised raw material plastic powder. In SLS 3D printing, a laser selectively fuses powdered material layer by layer until the whole part forms. SLS produces highly durable and complex plastic parts without needing support structures, making it ideal for both functional prototyping and small production runs in numerous industries.
@@ -205,191 +238,292 @@ const SLS: React.FC = () => {
         </motion.section>
         
         {/* Order high-quality SLS 3D printed parts online */}
-        <section className="mb-16">
+        <motion.section 
+          className="mb-16 animate-on-scroll"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+        >
           <h2 className="text-3xl font-bold mb-4 text-gradient">Order high-quality SLS 3D printed parts online</h2>
           <p className="text-lg mb-8 text-foreground/80">
             At Geomiq, we're proud to partner with 260+ experienced and thoroughly vetted selective laser sintering service providers with a proven track record of making high-quality, high-precision SLS 3D printed parts for customers all over the globe. With our partners' expertise, access to 120+ of the latest SLS 3D printers, our engineers' attention to detail, and our entire team's commitment to exceptional quality assurance at every stage, you can rest assured that with Geomiq, you'll receive only the best SLS 3D printed parts – the first time, every time.
           </p>
           
-          <div className="flex items-center justify-between bg-muted/30 p-6 rounded-lg">
+          <div className="flex items-center justify-between bg-muted/30 p-6 rounded-lg hover-scale pulse-glow">
             <div className="flex-1">
               <h3 className="font-bold mb-2">High quality printed part</h3>
             </div>
-            <Link to="/upload-file" className="button-primary">
-              Get instant quote
-            </Link>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Link to="/upload-file" className="button-primary">
+                Get instant quote
+              </Link>
+            </motion.div>
           </div>
-        </section>
+        </motion.section>
         
         {/* SLS 3D printer capabilities */}
-        <section className="mb-16">
+        <motion.section 
+          className="mb-16 animate-on-scroll"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+        >
           <h2 className="text-3xl font-bold mb-6 text-gradient">SLS 3D printer capabilities</h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <Card className="glass-morphism">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 stagger-animation">
+            <Card className="glass-morphism hover-scale feature-card">
               <CardContent className="p-6">
                 <h3 className="font-semibold mb-2">Tolerances</h3>
                 <p className="text-foreground/80 text-sm whitespace-pre-line">{capabilities.tolerances}</p>
               </CardContent>
             </Card>
             
-            <Card className="glass-morphism">
+            <Card className="glass-morphism hover-scale feature-card">
               <CardContent className="p-6">
                 <h3 className="font-semibold mb-2">Layer height</h3>
                 <p className="text-foreground/80 text-sm whitespace-pre-line">{capabilities.layerHeight}</p>
               </CardContent>
             </Card>
             
-            <Card className="glass-morphism">
+            <Card className="glass-morphism hover-scale feature-card">
               <CardContent className="p-6">
                 <h3 className="font-semibold mb-2">Max. build size</h3>
                 <p className="text-foreground/80 text-sm whitespace-pre-line">{capabilities.maxBuildSize}</p>
               </CardContent>
             </Card>
             
-            <Card className="glass-morphism">
+            <Card className="glass-morphism hover-scale feature-card">
               <CardContent className="p-6">
                 <h3 className="font-semibold mb-2">Min. feature size</h3>
                 <p className="text-foreground/80 text-sm">{capabilities.minFeatureSize}</p>
               </CardContent>
             </Card>
             
-            <Card className="glass-morphism">
+            <Card className="glass-morphism hover-scale feature-card">
               <CardContent className="p-6">
                 <h3 className="font-semibold mb-2">Standard lead time</h3>
                 <p className="text-foreground/80 text-sm">{capabilities.standardLeadTime}</p>
               </CardContent>
             </Card>
           </div>
-        </section>
+        </motion.section>
         
         {/* Why choose the SLS 3D printing service from Geomiq? */}
-        <section className="mb-16">
+        <motion.section 
+          className="mb-16 animate-on-scroll"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+        >
           <h2 className="text-3xl font-bold mb-8 text-gradient">Why choose the SLS 3D printing service from Geomiq?</h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 stagger-animation">
             {benefits.map((benefit, index) => (
-              <Card key={index} className="glass-morphism">
-                <CardContent className="p-6 space-y-3">
-                  <div className="bg-primary/10 p-2 rounded-lg inline-block mb-1">
-                    <span className="text-primary text-sm">{benefit.icon}</span>
-                  </div>
-                  <h3 className="font-bold text-lg">{benefit.title}</h3>
-                  <p className="text-foreground/80 text-sm">{benefit.description}</p>
-                </CardContent>
-              </Card>
+              <motion.div 
+                key={index}
+                whileHover={{ scale: 1.02, y: -5 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <Card className="glass-morphism h-full feature-card">
+                  <CardContent className="p-6 space-y-3">
+                    <div className="bg-primary/10 p-2 rounded-lg inline-block mb-1 pulse-glow">
+                      {benefit.icon}
+                    </div>
+                    <h3 className="font-bold text-lg">{benefit.title}</h3>
+                    <p className="text-foreground/80 text-sm">{benefit.description}</p>
+                  </CardContent>
+                </Card>
+              </motion.div>
             ))}
           </div>
-        </section>
+        </motion.section>
         
         {/* Our SLS 3D printing process */}
-        <section className="mb-16">
+        <motion.section 
+          className="mb-16 animate-on-scroll"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+        >
           <h2 className="text-3xl font-bold mb-8 text-gradient">Our SLS 3D printing process:</h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 stagger-animation">
             {processSteps.map((step, index) => (
-              <Card key={index} className="glass-morphism overflow-hidden">
-                <CardContent className="p-6 space-y-4">
-                  <div className="bg-primary/10 rounded-full w-10 h-10 flex items-center justify-center mb-2">
-                    <span className="font-bold text-primary">{index + 1}</span>
-                  </div>
-                  <h3 className="font-bold text-lg">{step.title}</h3>
-                  <p className="text-foreground/80 text-sm">{step.description}</p>
-                </CardContent>
-              </Card>
+              <motion.div 
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 * index }}
+              >
+                <Card className="glass-morphism overflow-hidden h-full hover-scale feature-card">
+                  <CardContent className="p-6 space-y-4">
+                    <div className="bg-primary/10 rounded-full w-10 h-10 flex items-center justify-center mb-2 pulse-glow float-animation">
+                      <span className="font-bold text-primary">{index + 1}</span>
+                    </div>
+                    <h3 className="font-bold text-lg">{step.title}</h3>
+                    <p className="text-foreground/80 text-sm">{step.description}</p>
+                  </CardContent>
+                </Card>
+              </motion.div>
             ))}
           </div>
-        </section>
+        </motion.section>
         
         {/* Featured Sections */}
-        <section className="mb-16 space-y-8">
+        <section className="mb-16 space-y-8 animate-on-scroll">
           {featuredSections.map((section, index) => (
-            <Card key={index} className="glass-morphism overflow-hidden">
-              <CardContent className="p-6 space-y-4">
-                <h3 className="text-2xl font-bold text-gradient">{section.title}</h3>
-                <p className="text-foreground/80">{section.description}</p>
-                <Link to="/upload-file" className="flex items-center text-primary hover:underline">
-                  {section.cta}
-                  <ArrowRight className="w-4 h-4 ml-1" />
-                </Link>
-              </CardContent>
-            </Card>
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.1 }}
+              viewport={{ once: true }}
+            >
+              <Card className="glass-morphism overflow-hidden hover-scale">
+                <CardContent className="p-6 space-y-4">
+                  <h3 className="text-2xl font-bold text-gradient">{section.title}</h3>
+                  <p className="text-foreground/80">{section.description}</p>
+                  <motion.div whileHover={{ x: 10 }} transition={{ type: "spring", stiffness: 400 }}>
+                    <Link to="/upload-file" className="flex items-center text-primary hover:underline">
+                      {section.cta}
+                      <ArrowRight className="w-4 h-4 ml-1" />
+                    </Link>
+                  </motion.div>
+                </CardContent>
+              </Card>
+            </motion.div>
           ))}
         </section>
         
         {/* Get instant quote */}
-        <section className="mb-16 text-center">
-          <Link to="/upload-file" className="button-primary inline-flex items-center gap-2 text-lg">
-            Get instant quote
-            <ArrowRight className="w-5 h-5" />
-          </Link>
+        <motion.section 
+          className="mb-16 text-center animate-on-scroll"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.8 }}
+        >
+          <motion.div 
+            whileHover={{ scale: 1.05 }} 
+            whileTap={{ scale: 0.95 }}
+          >
+            <Link to="/upload-file" className="button-primary inline-flex items-center gap-2 text-lg gradient-background">
+              Get instant quote
+              <ArrowRight className="w-5 h-5" />
+            </Link>
+          </motion.div>
           <p className="mt-2 text-sm text-foreground/60">All uploads are secure and confidential.</p>
-        </section>
+        </motion.section>
         
         {/* SLS 3D printing materials */}
-        <section className="mb-16">
+        <motion.section 
+          className="mb-16 animate-on-scroll"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.9 }}
+        >
           <h2 className="text-3xl font-bold mb-8 text-gradient">SLS 3D printing materials</h2>
           
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2 stagger-animation">
             {materials.map((material, index) => (
-              <span key={index} className="px-3 py-1 rounded-full bg-muted text-sm">
+              <motion.span 
+                key={index} 
+                className="px-3 py-1 rounded-full bg-muted text-sm badge-glow hover-scale pulse-glow"
+                whileHover={{ 
+                  scale: 1.1,
+                  backgroundColor: "rgba(14, 165, 233, 0.2)"
+                }}
+              >
                 {material}
-              </span>
+              </motion.span>
             ))}
           </div>
-        </section>
+        </motion.section>
         
         {/* SLS 3D printing finishing options */}
-        <section className="mb-16">
+        <motion.section 
+          className="mb-16 animate-on-scroll"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 1.0 }}
+        >
           <h2 className="text-3xl font-bold mb-8 text-gradient">SLS 3D printing finishing options</h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 stagger-animation">
             {finishingOptions.map((option, index) => (
-              <Card key={index} className="glass-morphism">
-                <CardContent className="p-6 space-y-2">
-                  <h3 className="font-bold text-lg">{option.title}</h3>
-                  <p className="text-foreground/80 text-sm">{option.description}</p>
-                </CardContent>
-              </Card>
+              <motion.div
+                key={index}
+                whileHover={{ scale: 1.02 }}
+                transition={{ type: "spring", stiffness: 400 }}
+              >
+                <Card className="glass-morphism h-full feature-card">
+                  <CardContent className="p-6 space-y-2">
+                    <h3 className="font-bold text-lg">{option.title}</h3>
+                    <p className="text-foreground/80 text-sm">{option.description}</p>
+                  </CardContent>
+                </Card>
+              </motion.div>
             ))}
           </div>
-        </section>
+        </motion.section>
         
         {/* Benefits and limitations */}
-        <section className="mb-16">
+        <motion.section 
+          className="mb-16 animate-on-scroll"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 1.1 }}
+        >
           <h2 className="text-3xl font-bold mb-8 text-gradient">Benefits and limitations of SLS 3D printing service</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <Card className="glass-morphism">
-              <CardContent className="p-6">
-                <h3 className="font-bold text-lg mb-4">Benefits:</h3>
-                <ul className="list-disc ml-5 space-y-2 text-foreground/80">
-                  <li>Produces parts with good mechanical properties.</li>
-                  <li>Does not require support structures during printing</li>
-                  <li>Fast printing process for functional, durable prototypes or end-use parts</li>
-                </ul>
-              </CardContent>
-            </Card>
+            <motion.div
+              whileHover={{ scale: 1.03 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              <Card className="glass-morphism h-full feature-card">
+                <CardContent className="p-6">
+                  <h3 className="font-bold text-lg mb-4">Benefits:</h3>
+                  <ul className="list-disc ml-5 space-y-2 text-foreground/80">
+                    <li>Produces parts with good mechanical properties.</li>
+                    <li>Does not require support structures during printing</li>
+                    <li>Fast printing process for functional, durable prototypes or end-use parts</li>
+                  </ul>
+                </CardContent>
+              </Card>
+            </motion.div>
             
-            <Card className="glass-morphism">
-              <CardContent className="p-6">
-                <h3 className="font-bold text-lg mb-4">Limitations:</h3>
-                <ul className="list-disc ml-5 space-y-2 text-foreground/80">
-                  <li>Limited material choice</li>
-                  <li>Produces a relatively rough grainy surface finish</li>
-                  <li>Large, thin features are susceptible to warping</li>
-                </ul>
-              </CardContent>
-            </Card>
+            <motion.div
+              whileHover={{ scale: 1.03 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              <Card className="glass-morphism h-full feature-card">
+                <CardContent className="p-6">
+                  <h3 className="font-bold text-lg mb-4">Limitations:</h3>
+                  <ul className="list-disc ml-5 space-y-2 text-foreground/80">
+                    <li>Limited material choice</li>
+                    <li>Produces a relatively rough grainy surface finish</li>
+                    <li>Large, thin features are susceptible to warping</li>
+                  </ul>
+                </CardContent>
+              </Card>
+            </motion.div>
           </div>
-        </section>
+        </motion.section>
         
         {/* Comparison Table */}
-        <section className="mb-16">
+        <motion.section 
+          className="mb-16 animate-on-scroll"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 1.2 }}
+        >
           <h2 className="text-3xl font-bold mb-8 text-gradient">SLS 3D printing service compared to other 3D printing technologies</h2>
           
           <div className="overflow-x-auto">
-            <table className="min-w-full bg-muted/30 rounded-lg">
+            <motion.table 
+              className="min-w-full bg-muted/30 rounded-lg"
+              whileHover={{ boxShadow: "0 0 20px rgba(14, 165, 233, 0.15)" }}
+            >
               <thead>
                 <tr className="border-b border-border">
                   <th className="px-4 py-3 text-left">Dimensional accuracy</th>
@@ -401,42 +535,67 @@ const SLS: React.FC = () => {
               </thead>
               <tbody>
                 {comparisonTable.map((tech, index) => (
-                  <tr key={index} className="border-b border-border">
+                  <motion.tr 
+                    key={index} 
+                    className="border-b border-border"
+                    whileHover={{ backgroundColor: "rgba(14, 165, 233, 0.05)" }}
+                  >
                     <td className="px-4 py-3 font-medium whitespace-pre-line">{tech.accuracy}</td>
                     <td className="px-4 py-3">{tech.strengths}</td>
                     <td className="px-4 py-3 whitespace-pre-line">{tech.buildVolume}</td>
                     <td className="px-4 py-3">{tech.layerThickness}</td>
                     <td className="px-4 py-3">{tech.minFeatureSize}</td>
-                  </tr>
+                  </motion.tr>
                 ))}
               </tbody>
-            </table>
+            </motion.table>
           </div>
-        </section>
+        </motion.section>
         
         {/* Our SLS 3D printing gallery */}
-        <section className="mb-16">
+        <motion.section 
+          className="mb-16 animate-on-scroll"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 1.3 }}
+        >
           <h2 className="text-3xl font-bold mb-8 text-gradient">Our SLS 3D printing gallery</h2>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 stagger-animation">
             {gallery.map((item, index) => (
-              <div key={index} className="bg-muted/30 p-4 rounded-lg flex flex-col items-center justify-center aspect-square">
+              <motion.div 
+                key={index} 
+                className="bg-muted/30 p-4 rounded-lg flex flex-col items-center justify-center aspect-square hover-scale feature-card"
+                whileHover={{ 
+                  scale: 1.03,
+                  boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 5px 15px -5px rgba(14, 165, 233, 0.2)"
+                }}
+              >
                 <p className="text-center font-medium mb-2">{item.name}</p>
                 <p className="text-center text-sm text-foreground/70">{item.image}</p>
-              </div>
+              </motion.div>
             ))}
           </div>
-        </section>
+        </motion.section>
         
         {/* Final Get instant quote */}
-        <section className="mb-16 text-center">
-          <Link to="/upload-file" className="button-primary inline-flex items-center gap-2 text-lg">
-            Get instant quote
-            <ArrowRight className="w-5 h-5" />
-          </Link>
+        <motion.section 
+          className="mb-16 text-center animate-on-scroll"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 1.4 }}
+        >
+          <motion.div 
+            whileHover={{ scale: 1.05 }} 
+            whileTap={{ scale: 0.95 }}
+          >
+            <Link to="/upload-file" className="button-primary inline-flex items-center gap-2 text-lg gradient-background">
+              Get instant quote
+              <ArrowRight className="w-5 h-5" />
+            </Link>
+          </motion.div>
           <p className="mt-2 text-sm text-foreground/60">All uploads are secure and confidential.</p>
-          <p className="mt-1 text-sm text-foreground/60">All uploads are secure and confidential.</p>
-        </section>
+        </motion.section>
       </div>
     </PageTemplate>
   );
