@@ -48,7 +48,7 @@ const PageTemplate: React.FC<PageTemplateProps> = ({
             </motion.h1>
             {description && (
               <motion.p 
-                className="text-xl text-foreground/80 max-w-3xl mx-auto text-center mb-10 animate-on-scroll"
+                className="text-xl text-primary/90 max-w-3xl mx-auto text-center mb-10 animate-on-scroll"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
