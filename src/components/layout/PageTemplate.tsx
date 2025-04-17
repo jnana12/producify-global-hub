@@ -31,7 +31,7 @@ const PageTemplate: React.FC<PageTemplateProps> = ({
           <div className="absolute inset-0 z-0">
             {backgroundImage && (
               <div 
-                className="absolute inset-0 opacity-10 bg-cover bg-center" 
+                className="absolute inset-0 opacity-15 bg-cover bg-center"
                 style={{ backgroundImage: `url(${backgroundImage})` }}
               ></div>
             )}
@@ -48,7 +48,7 @@ const PageTemplate: React.FC<PageTemplateProps> = ({
             </motion.h1>
             {description && (
               <motion.p 
-                className="text-xl text-primary/90 max-w-3xl mx-auto text-center mb-10 animate-on-scroll"
+                className="text-xl text-primary max-w-3xl mx-auto text-center mb-10 animate-on-scroll"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
