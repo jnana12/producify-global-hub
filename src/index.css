@@ -5,46 +5,45 @@
 @layer base {
   :root {
     --background: 222 47% 11%;
-    --foreground: 210 40% 95%;
+    --foreground: 0 0% 98%;
 
     --card: 222 47% 14%;
-    --card-foreground: 210 40% 98%;
+    --card-foreground: 0 0% 98%;
 
     --popover: 222 47% 15%;
-    --popover-foreground: 210 40% 98%;
+    --popover-foreground: 0 0% 98%;
 
-    /* Changed from orange to a deep blue-purple */
-    --primary: 240 50% 30%;
-    --primary-foreground: 210 40% 95%;
+    /* Using a mix of purples and neutrals for better contrast */
+    --primary: 277 75% 84%;
+    --primary-foreground: 0 0% 10%;
 
-    --secondary: 217 76% 56%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 297 50% 51%;
+    --secondary-foreground: 0 0% 98%;
 
     --muted: 217 33% 17%;
-    --muted-foreground: 210 40% 80%;
+    --muted-foreground: 210 40% 90%;
 
-    /* Changed accent to match new theme */
-    --accent: 240 50% 30%;
-    --accent-foreground: 210 40% 95%;
+    --accent: 297 50% 51%;
+    --accent-foreground: 0 0% 98%;
 
     --destructive: 0 62% 46%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 98%;
 
     --border: 217 33% 17%;
     --input: 217 33% 17%;
-    --ring: 240 50% 30%;
+    --ring: 277 75% 84%;
 
     --radius: 0.5rem;
 
-    /* Sidebar colors adjusted to match new theme */
+    /* Sidebar colors adjusted for new theme */
     --sidebar-background: 222 47% 11%;
-    --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 240 50% 30%;
-    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 277 75% 84%;
+    --sidebar-primary-foreground: 0 0% 10%;
     --sidebar-accent: 222 47% 15%;
-    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-accent-foreground: 0 0% 98%;
     --sidebar-border: 222 47% 20%;
-    --sidebar-ring: 240 50% 30%;
+    --sidebar-ring: 277 75% 84%;
   }
 }
 
@@ -74,11 +73,11 @@
   }
   
   .text-gradient {
-    @apply bg-gradient-to-br from-primary via-primary/80 to-accent/90 bg-clip-text text-transparent;
+    @apply bg-gradient-to-br from-primary via-primary/90 to-accent/80 bg-clip-text text-transparent;
   }
 
   .text-gradient-secondary {
-    @apply bg-gradient-to-br from-secondary via-secondary/80 to-blue-400/90 bg-clip-text text-transparent;
+    @apply bg-gradient-to-br from-secondary via-secondary/80 to-accent/70 bg-clip-text text-transparent;
   }
 
   /* Updated gradient styles */
@@ -132,12 +131,12 @@
   }
 
   .button-primary {
-    @apply bg-primary hover:bg-primary/90 text-white font-medium py-2 px-4 md:px-6 rounded-md transition-all duration-300 
+    @apply bg-primary hover:bg-primary/90 text-primary-foreground font-medium py-2 px-4 md:px-6 rounded-md transition-all duration-300 
     hover:shadow-[0_0_15px_rgba(239,68,68,0.5)] flex items-center justify-center gap-2;
   }
 
   .button-secondary {
-    @apply bg-secondary hover:bg-secondary/90 text-white font-medium py-2 px-4 md:px-6 rounded-md transition-all duration-300 
+    @apply bg-secondary hover:bg-secondary/90 text-secondary-foreground font-medium py-2 px-4 md:px-6 rounded-md transition-all duration-300 
     hover:shadow-[0_0_15px_rgba(59,130,246,0.5)] flex items-center justify-center gap-2;
   }
 
@@ -148,15 +147,15 @@
 
   /* New text contrast utilities */
   .text-high-contrast {
-    @apply text-foreground/95 font-semibold;
+    @apply text-foreground font-semibold;
   }
 
   .text-medium-contrast {
-    @apply text-foreground/80;
+    @apply text-foreground/90;
   }
 
   .text-low-contrast {
-    @apply text-foreground/60;
+    @apply text-foreground/80;
   }
 }
 
