@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -14,7 +13,8 @@
     --popover: 222 47% 15%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 16 89% 55%;
+    /* Changed from orange to a deep blue-purple */
+    --primary: 240 50% 30%;
     --primary-foreground: 210 40% 98%;
 
     --secondary: 217 76% 56%;
@@ -23,7 +23,8 @@
     --muted: 217 33% 17%;
     --muted-foreground: 215 20% 70%;
 
-    --accent: 16 89% 55%;
+    /* Changed accent to match new theme */
+    --accent: 240 50% 30%;
     --accent-foreground: 210 40% 98%;
 
     --destructive: 0 62% 46%;
@@ -31,18 +32,19 @@
 
     --border: 217 33% 17%;
     --input: 217 33% 17%;
-    --ring: 16 89% 55%;
+    --ring: 240 50% 30%;
 
     --radius: 0.5rem;
 
+    /* Sidebar colors adjusted to match new theme */
     --sidebar-background: 222 47% 11%;
     --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 16 89% 55%;
+    --sidebar-primary: 240 50% 30%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 222 47% 15%;
     --sidebar-accent-foreground: 210 40% 98%;
     --sidebar-border: 222 47% 20%;
-    --sidebar-ring: 16 89% 55%;
+    --sidebar-ring: 240 50% 30%;
   }
 }
 
@@ -78,12 +80,26 @@
     @apply bg-gradient-to-br from-secondary via-secondary/80 to-blue-400/90 bg-clip-text text-transparent;
   }
 
+  /* Updated gradient styles */
   .bg-gradient-primary {
     @apply bg-gradient-to-br from-primary/20 via-primary/10 to-transparent;
   }
 
   .bg-gradient-secondary {
     @apply bg-gradient-to-br from-secondary/20 via-secondary/10 to-transparent;
+  }
+
+  /* New degradation effect classes */
+  .gradient-fade {
+    @apply bg-gradient-to-b from-background via-background/95 to-background/90;
+  }
+
+  .card-gradient {
+    @apply bg-gradient-to-br from-card to-card/80 backdrop-blur-sm;
+  }
+
+  .button-gradient {
+    @apply bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70;
   }
 
   .section-padding {
