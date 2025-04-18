@@ -1,15 +1,17 @@
-
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
+import { PasswordStrength } from "@/components/ui/password-strength";
 import PageTemplate from "../components/layout/PageTemplate";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 const SignIn = () => {
+  const [password, setPassword] = useState("");
+
   return (
     <PageTemplate
       title="Sign In"
@@ -40,7 +42,13 @@ const SignIn = () => {
                     Forgot password?
                   </Link>
                 </div>
-                <Input id="password" type="password" />
+                <Input 
+                  id="password" 
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <PasswordStrength password={password} />
               </div>
               <div className="flex items-center space-x-2">
                 <Checkbox id="remember" />
